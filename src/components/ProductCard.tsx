@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   product: Product;
-  badge?: string;
-  className?: string;
+  badge?: string | undefined;
+  className?: string | undefined;
 };
+
 
 export function ProductCard({ product, badge, className }: Props) {
   return (
