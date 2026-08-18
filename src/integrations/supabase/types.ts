@@ -14,7 +14,98 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          affiliate_url: string
+          category_id: string | null
+          cons: string[]
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          is_featured: boolean
+          is_published: boolean
+          price_indicator: string | null
+          pros: string[]
+          seo_description: string | null
+          seo_title: string | null
+          short_description: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          affiliate_url: string
+          category_id?: string | null
+          cons?: string[]
+          created_at?: string
+          description: string
+          id?: string
+          image_url: string
+          is_featured?: boolean
+          is_published?: boolean
+          price_indicator?: string | null
+          pros?: string[]
+          seo_description?: string | null
+          seo_title?: string | null
+          short_description: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          affiliate_url?: string
+          category_id?: string | null
+          cons?: string[]
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          is_featured?: boolean
+          is_published?: boolean
+          price_indicator?: string | null
+          pros?: string[]
+          seo_description?: string | null
+          seo_title?: string | null
+          short_description?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
