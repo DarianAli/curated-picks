@@ -19,6 +19,7 @@ import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminProductsIndexRouteImport } from './routes/_authenticated/admin.products.index'
+import { Route as AuthenticatedAdminProductsIdRouteImport } from './routes/_authenticated/admin.products.$id'
 import { Route as AuthenticatedAdminProductsNewRouteImport } from './routes/_authenticated/admin.products.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,12 @@ const AuthenticatedAdminProductsIndexRoute =
     path: '/products/',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminProductsIdRoute =
+  AuthenticatedAdminProductsIdRouteImport.update({
+    id: '/products/$id',
+    path: '/products/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminProductsNewRoute =
   AuthenticatedAdminProductsNewRouteImport.update({
     id: '/products/new',
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/products/$slug': typeof ProductsSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/products/$id': typeof AuthenticatedAdminProductsIdRoute
   '/admin/products/new': typeof AuthenticatedAdminProductsNewRoute
   '/admin/products/': typeof AuthenticatedAdminProductsIndexRoute
 }
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
   '/products/$slug': typeof ProductsSlugRoute
   '/products': typeof ProductsIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/products/$id': typeof AuthenticatedAdminProductsIdRoute
   '/admin/products/new': typeof AuthenticatedAdminProductsNewRoute
   '/admin/products': typeof AuthenticatedAdminProductsIndexRoute
 }
@@ -112,6 +121,7 @@ export interface FileRoutesById {
   '/products/$slug': typeof ProductsSlugRoute
   '/products/': typeof ProductsIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/products/$id': typeof AuthenticatedAdminProductsIdRoute
   '/_authenticated/admin/products/new': typeof AuthenticatedAdminProductsNewRoute
   '/_authenticated/admin/products/': typeof AuthenticatedAdminProductsIndexRoute
 }
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/products/$slug'
     | '/products/'
     | '/admin/'
+    | '/admin/products/$id'
     | '/admin/products/new'
     | '/admin/products/'
   fileRoutesByTo: FileRoutesByTo
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/products/$slug'
     | '/products'
     | '/admin'
+    | '/admin/products/$id'
     | '/admin/products/new'
     | '/admin/products'
   id:
@@ -150,6 +162,7 @@ export interface FileRouteTypes {
     | '/products/$slug'
     | '/products/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/products/$id'
     | '/_authenticated/admin/products/new'
     | '/_authenticated/admin/products/'
   fileRoutesById: FileRoutesById
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProductsIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/products/$id': {
+      id: '/_authenticated/admin/products/$id'
+      path: '/products/$id'
+      fullPath: '/admin/products/$id'
+      preLoaderRoute: typeof AuthenticatedAdminProductsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/products/new': {
       id: '/_authenticated/admin/products/new'
       path: '/products/new'
@@ -248,12 +268,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminProductsIdRoute: typeof AuthenticatedAdminProductsIdRoute
   AuthenticatedAdminProductsNewRoute: typeof AuthenticatedAdminProductsNewRoute
   AuthenticatedAdminProductsIndexRoute: typeof AuthenticatedAdminProductsIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminProductsIdRoute: AuthenticatedAdminProductsIdRoute,
   AuthenticatedAdminProductsNewRoute: AuthenticatedAdminProductsNewRoute,
   AuthenticatedAdminProductsIndexRoute: AuthenticatedAdminProductsIndexRoute,
 }
